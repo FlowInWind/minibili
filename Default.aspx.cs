@@ -16,11 +16,6 @@ public partial class _Default : Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        MiniBli.sqlUse search = new MiniBli.sqlUse();
-        string table = "AspNetUsers";
-        string key = "IsAdmin";
-        string what = "0";
-        DataTable dt = search.doSearch(table, key, what);
-        TextBox1.Text = dt.Rows[0]["IsAdmin"].ToString();
+     
     }
 }

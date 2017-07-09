@@ -32,7 +32,7 @@ namespace MiniBli
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = $"select {colmNames} from {table} where {key}=N'{what}' {extra}";
+            cmd.CommandText = $"select {colmNames} from {table} where {key} = N'{what}' {extra}";
             DataTable dt = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.SelectCommand = cmd;

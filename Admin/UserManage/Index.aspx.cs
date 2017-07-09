@@ -55,7 +55,7 @@ public partial class Admin_UserManage_Search : System.Web.UI.Page
             default:
                 break;
         }
-        string what = TextBox1.Text + "' and IsAdmin != '1";
+        string what = TextBox1.Text + "' and UserName != 'Admin";
         DataTable dt = new DataTable();
         if (TextBox1.Text != "")
         {
@@ -63,7 +63,7 @@ public partial class Admin_UserManage_Search : System.Web.UI.Page
         }
         else
         {
-            dt = search.doSearch(table,"IsAdmin","0","", "Id,UserName,NickName,Email,PhoneNumber");
+            dt = search.doSearch($"select Id,UserName,NickName,Email,PhoneNumber from {table} where UserName != 'Admin'");
         }
         DataSet ds = new DataSet();
         ds.Tables.Add(dt);

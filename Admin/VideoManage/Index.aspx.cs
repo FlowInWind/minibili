@@ -57,7 +57,7 @@ public partial class Admin_UserManage : System.Web.UI.Page
                 key = "Type";
                 break;
             case "上传者":
-                key = "upuser";
+                key = "Upuser";
                 break;
             default:
                 break;
