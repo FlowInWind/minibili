@@ -83,12 +83,39 @@ public partial class Admin_UserManage : System.Web.UI.Page
         string what = GridView1.Rows[e.RowIndex].Cells[1].Text;
         MiniBli.sqlUse delete = new MiniBli.sqlUse();
         string table = "Video";
+
+        DataTable dt = delete.doSearch($"search location from {table} where Id = {what}");
+        string loc = dt.Rows[0]["location"].ToString();
+        string str = "del /s /f /q " + loc;
+
+
+        System.Diagnostics.Process p = new System.Diagnostics.Process();
+        p.StartInfo.FileName = "cmd.exe";
+        p.StartInfo.UseShellExecute = false;    //是否使用操作系统shell启动
+        p.StartInfo.RedirectStandardInput = true;//接受来自调用程序的输入信息
+        p.StartInfo.RedirectStandardOutput = true;//由调用程序获取输出信息
+        p.StartInfo.RedirectStandardError = true;//重定向标准错误输出
+        p.StartInfo.CreateNoWindow = true;//不显示程序窗口
+        p.Start();//启动程序
+
+        //向cmd窗口发送输入信息
+        p.StandardInput.WriteLine(str + "&exit");
+
+        p.StandardInput.AutoFlush = true;
+
+        string output = p.StandardOutput.ReadToEnd();
+
+        p.WaitForExit();//等待程序执行完退出进程
+        p.Close();
         string sql = $"delete from {table} where Id = '{what}' ";
         int i = delete.doDelete(sql);
         if (i != 0)
         {
             BindData();
         }
+
+        Console.WriteLine(output);
+
         Response.Write("<script>alert('删除成功！');</script>");
     }
 
